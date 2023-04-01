@@ -16,7 +16,7 @@ app = Flask(__name__)
 def home():
 	return render_template('home.html')
 
-@app.route('/predict',methods=['POST'])
+@app.route('/predict',methods=['POST']) #used to specify the URL that will trigger the function
 def predict():
 	df= pd.read_csv("spam.csv", encoding="latin-1")
 	df.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis=1, inplace=True)
@@ -35,6 +35,7 @@ def predict():
 	from sklearn.naive_bayes import MultinomialNB
 
 	clf = MultinomialNB()   #method from the sklearn library used to create a Naive Bayes classifier for text data. 
+ 
 	clf.fit(X_train,y_train)  # evaluate the performance of the classifier
 	clf.score(X_test,y_test)  
  
@@ -47,10 +48,16 @@ def predict():
 		message = request.form['message']
 		data = [message]
 		vect = cv.transform(data).toarray()
-		my_prediction = clf.predict(vect)
+		my_prediction = clf.predict(vect) 
+  #method is used to predict the label of a new SMS message. 
+  # This method returns a binary value of either 0 or 1, 
+  # which corresponds to whether the message is predicted to be not spam or spam, respectively.
+  # #clf is the object representing the trained Naive Bayes classifier,
 	return render_template('result.html',prediction = my_prediction)
 
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': #ensures that the app runs only if it is executed as the main script.
 	app.run(debug=True)
+ 
+ #  predict function reads in a CSV file containing spam and ham messages, processes the data by cleaning it and creating a count vectorizer, and trains a Multinomial Naive Bayes classifier on the data.

@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+{% comment %} Django is a high-level, open-source Python web framework that is used for building web applications. 
+It follows the model-view-controller (MVC) architectural pattern and is designed to help developers build complex, 
+database-driven websites quickly and easily.
+Django includes a variety of built-in features and tools that make web development more efficient and streamlined. 
+For example, it provides an ORM (Object-Relational Mapping) system that allows developers to interact with databases 
+using Python code rather than SQL queries. It also includes built-in tools for URL routing, authentication, user management,
+ and other common web development tasks. {% endcomment %}
 <html>
 <head>
 	<title>Home</title>
@@ -19,8 +26,8 @@
 	</header>
 
 	<div class="ml-container" >
-
-		<form action="{{ url_for('predict')}}" method="POST">
+{% comment %} attribute specifies the URL where the form data will be sent. In this case, it will be sent to the predict() function of the Flask app.  {% endcomment %}
+		<form action="{{ url_for('predict')}}" method="POST"> 
 		<p>Enter Your Message Here</p>
 		
 		<textarea name="message" rows="4" cols="50"></textarea>
